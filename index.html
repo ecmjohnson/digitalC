@@ -20,7 +20,10 @@
   <script type="text/javascript" src="https://playground-sense.qlik.com/showcase/resources/assets/external/requirejs/require.js"></script>
   <script type="text/javascript" src="/resources/script.js"></script>
   <script type="text/javascript">
-    main();
+  function test_cb(data) {
+      console.log(data[0]["Lead entity"]);
+  }
+    main(test_cb);
   </script>
 </body>
 

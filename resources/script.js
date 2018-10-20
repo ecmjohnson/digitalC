@@ -61,7 +61,7 @@ var config = {
   appname: '0b0fc6d5-05ce-44d7-95aa-80d0680b3559'
 }
 
-function main() {
+function main(callback_fnc) {
   // our API uses requirejs, so here we're setting up our base URL
   require.config({
     baseUrl:
@@ -91,7 +91,7 @@ function main() {
       var ret = twoDimensions(app, 'Partner List', 'Lead entity')
       ret.then((response) => {
          ret_list = response
-         console.log(response[0]["Lead entity"]) // example
+         callback_fnc(ret_list);
       })
   })
 }
