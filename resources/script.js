@@ -6,24 +6,19 @@ function make_my_hypercube(app) {
                 qFieldDefs: ['Country']
             }
         },
-        // {
-        //     qDef: {
-        //         qFieldDefs: ['Partner List']
-        //     }
-        // }
         ],
         qMeasures: [
-          {
+        {
             qDef: { qDef: '=count([Commitment Title])' },
             qSortBy: { qSortByNumeric: true }
-          }         
+        }       
         ],
-        qInterColumnSortOrder: [2, 0, 1],
+        qInterColumnSortOrder: [1, 0],
         qInitialDataFetch: [
         {
             qTop: 0,
             qLeft: 0,
-            qHeight: 200,
+            qHeight: 2000,
             qWidth: 3
         }
         ]
@@ -33,21 +28,25 @@ function make_my_hypercube(app) {
         // this function will be called each time the data changes (ie. when
         // someone makes a selection).
 
-
         // the basic matrix of data is available in the hypercube datapages
         let matrix = hypercube.qHyperCube.qDataPages[0].qMatrix
 
-            // you can then treat the matrix as an array
-            matrix.forEach((row, index) => {
-                // the value for each column can be obtained by referencing array indexes
-                // you can use qText for text values and qNum for numerical
-                console.log("Country:", row[0].qText)
-                // let partners = row[1].qText.split(",")
-                // partners.forEach((partner, index) => {
-                //   console.log("Partner ", index, " : ", partner)
-                // })
-                console.log("Commitment title count : " , row[1].qText)
-            })
+        // sort the results by number of commitments
+        var sortResults = []
+
+        // you can then treat the matrix as an array
+        matrix.forEach((row, index) => {
+            // the value for each column can be obtained by referencing array indexes
+            // you can use qText for text values and qNum for numerical
+            console.log(row[0].qText + ' ' + row[1].qNum);
+            var element = {country: row[0].qText, commits: row[1].qNum};
+            sortResults.push(element);
+        })
+
+        sortResults.sort(function(a, b) {
+            return a.commits - b.commits;
+        });
+        console.log(sortResults);
     })
 }
 
