@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 function twoDimensions(app, dim1, dim2) {
     var hyperCubeDef = {
         qDimensions: [
@@ -57,7 +55,6 @@ function twoDimensions(app, dim1, dim2) {
     })
 }
 
->>>>>>> f73ebc0... two dimension function
 // this is the config object used to connect to an app on a Qlik Sense server
 var config = {
   host: 'playground-sense.qlik.com',
@@ -92,13 +89,11 @@ function main() {
       console.log('ERROR', error)
     })
 
-<<<<<<< HEAD
     // Open a dataset on the server
     app = qlik.openApp(config.appname, config)
     console.log("App Opened", app)
   })
-}
-=======
+
     /**
      * Load the entry point for the Capabilities API family
      * See full documention:
@@ -119,4 +114,3 @@ function main() {
 
     })
 }
->>>>>>> f73ebc0... two dimension function
