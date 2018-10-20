@@ -14,6 +14,7 @@
 
   <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
   <script type="text/javascript" src="/resources/liquidFillGauge.js"></script>
+  <script type="text/javascript" src="/resources/liquidFillSupport.js"></script>
 </head>
 
 <body>
@@ -23,19 +24,14 @@
 
   <script type="text/javascript" src="https://playground-sense.qlik.com/showcase/resources/assets/external/requirejs/require.js"></script>
   <script type="text/javascript" src="/resources/script.js"></script>
+
   <script type="text/javascript">
-    d3.select("body").append("svg")
-        .attr("width", "97%")
-        .attr("height", "250")
-        .attr("id", "fillgauge1");
-    var liqConfig = liquidFillGaugeDefaultSettings();
-    liqConfig.circleThickness = 0.1;
-    liqConfig.circleFillGap = 0.1;
-    liqConfig.textVertPosition = 0.8;
-    liqConfig.waveAnimateTime = 2000;
-    liqConfig.waveHeight = 0.3;
-    liqConfig.waveCount = 1;
-    var liqGauge = loadLiquidFillGauge("fillgauge1", 66, liqConfig);
+  
+    var svg_settings = [];
+    svg_settings.push(["width", "97%"]);
+    svg_settings.push(["height", "250"]);
+    var liqGauge = add_liquid_gauge(svg_settings, "fillgauge1", 50);
+    update_liquid_gauge(liqGauge, 10)
 
     main();
   </script>
