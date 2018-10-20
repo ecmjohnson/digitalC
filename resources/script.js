@@ -111,6 +111,5 @@ function main() {
         app = qlik.openApp(config.appname, config)
         console.log("App Opened", app)
         var ret_list = twoDimensions(app, 'Commitment Title', 'Partner List'); // example
-        alert(ret_list)
     })
 }
