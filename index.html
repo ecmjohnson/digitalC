@@ -17,9 +17,19 @@
   <div id="container">
 
   </div>
+
   <script type="text/javascript" src="https://playground-sense.qlik.com/showcase/resources/assets/external/requirejs/require.js"></script>
   <script type="text/javascript" src="/resources/script.js"></script>
+  <script type="text/javascript" src="/resources/sigma.min.js"></script>
+  <script type="text/javascript" src="/resources/sigma.parsers.json.min.js"></script>
   <script type="text/javascript">
+    sigma.parsers.json('data.json', {
+        container: 'container',
+        settings: {
+            defaultNodeColor: '#ec5148'
+        }
+    });
+
     main();
   </script>
 </body>
