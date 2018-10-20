@@ -3,12 +3,12 @@ function make_my_hypercube(app) {
         qDimensions: [
         {
             qDef: {
-                qFieldDefs: ['Indicator ID']
+                qFieldDefs: ['Commitment ID']
             }
         },
         {
             qDef: {
-                qFieldDefs: ['Indicator Title']
+                qFieldDefs: ['Partner List']
             }
         }
         ],
@@ -39,8 +39,11 @@ function make_my_hypercube(app) {
             matrix.forEach((row, index) => {
                 // the value for each column can be obtained by referencing array indexes
                 // you can use qText for text values and qNum for numerical
-                console.log("Indicator ID:", row[0].qText)
-                console.log("Indicator Title:", row[1].qText)
+                console.log("Commitment ID:", row[0].qText)
+                let partners = row[1].qText.split(",")
+                partners.forEach((partner, index) => {
+                  console.log("Partner ", index, " : ", partner)
+                })
             })
     })
 }
