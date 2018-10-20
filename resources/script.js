@@ -80,7 +80,8 @@ function main() {
       // Open a dataset on the server
       app = qlik.openApp(config.appname, config)
       console.log("App Opened", app)
-      var ret_list = twoDimensions(app, 'Partner List', 'Lead entity'); // example
-      console.log(ret_list)
+      //var ret_list = twoDimensions(app, 'Partner List', 'Lead entity'); // example
+      get_top_commitments(app);
+      //console.log(ret_list)
   })
 }
