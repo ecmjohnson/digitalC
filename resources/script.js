@@ -64,8 +64,6 @@ function main() {
       config.prefix +
       'resources'
   })
-
-
   /**
    * Load the entry point for the Capabilities API family
    * See full documention:
@@ -82,25 +80,7 @@ function main() {
       // Open a dataset on the server
       app = qlik.openApp(config.appname, config)
       console.log("App Opened", app)
-      var ret_list = twoDimensions(app, 'Commitment Title', 'Partner List'); // example
+      var ret_list = twoDimensions(app, 'Partner List', 'Lead entity'); // example
       console.log(ret_list)
   })
-    /**
-     * Load the entry point for the Capabilities API family
-     * See full documention:
-     * https://help.qlik.com/en-US/sense-developer/September2018/Subsystems/APIs/Content/Sense_ClientAPIs/CapabilityAPIs/qlik-interface-interface.htm
-     */
-    require(['js/qlik'], function(qlik) {
-        // We're now connected
-
-        // Suppress Qlik error dialogs and handle errors how you like.
-        qlik.setOnError(function(error) {
-            console.log('ERROR', error)
-        })
-
-        // Open a dataset on the server
-        app = qlik.openApp(config.appname, config)
-        console.log("App Opened", app)
-        var ret_list = twoDimensions(app, 'Commitment Title', 'Partner List'); // example
-    })
 }
