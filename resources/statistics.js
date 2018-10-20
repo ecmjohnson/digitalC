@@ -1,14 +1,20 @@
-function create_top_cube(app, dim1, measurement) {
+var list = []
+var commitment_list = []
+var entities_list = []
+var partners_list = []
+
+var process_results_called = false
+function create_top_cube(app, dim1, measurement, my_callback) {
     var hyperCubeDef = {
         qDimensions: [
           {
-              qDef: { qFieldDefs: ["Commitment Title"] }
+              qDef: { qFieldDefs: [dim1] }
           }
         ],
-        qMeasures: [ 
+        qMeasures: [
         {
             qDef: { qDef: '=count([' + measurement + '])' },
-            qSortBy: { qSortByNumber: true}
+            qSortBy: { qSortByNumeric: -1}
         }
         ],
         qInterColumnSortOrder: [1, 0],
@@ -17,16 +23,17 @@ function create_top_cube(app, dim1, measurement) {
             qTop: 0,
             qLeft: 0,
             qHeight: 2000,
-            qWidth: 3
+            qWidth: 2
         }
         ]
     }
-    var list = []
+
     var first, second, third
     app.createCube(hyperCubeDef, hypercube => {
         let matrix = hypercube.qHyperCube.qDataPages[0].qMatrix
             matrix.forEach((row, index) => {
-                /*if (first == null) {
+                if (first == null) {
+                    process_results_called = false
                     first = row
                     list.push(row)
                 } else if (second == null) {
@@ -35,35 +42,22 @@ function create_top_cube(app, dim1, measurement) {
                 } else if (third == null) {
                     third = row
                     list.push(row)
-                } else {
+                } else if (process_results_called != true){
+                    process_results_called = true
+                    my_callback(list)
+                    list = []
                     return
-                }*/
-                console.log(row[0] + ":" + row[1]);
-                var obj = {}
-                // if row[0] have multiple things
-                if (row[0].qText.includes(",") == true) {
-                  let dimension1 = row[0].qText.split(",")
-                  obj[dim1] = dimension1
-                } else {
-                  obj[dim1] = row[0].qText
                 }
-
-                //if row[1] have multiple things
-                if (row[1].qText.includes(",") == true) {
-                  let measurement = row[1].qText.split(",")
-                  obj[measurement] = measurement
-                } else {
-                  obj[measurement] = row[1].qText
-                }
-                list.push(obj)
             })
     })
+}
 
-    return list;
+function process_results(list) {
+  console.log(list)
 }
 
 function get_top_commitments(app) {
-    var list = create_top_cube(app, "Commitment Title", "Partners")
-    console.log(list);
+    commitment_list = create_top_cube(app, "Commitment Title", "Partners", process_results)
+    partners_list = create_top_cube(app, "Country", "Partners", process_results)
+    entities_list = create_top_cube(app, "Partners", "Lead entity", process_results)
 }
-
