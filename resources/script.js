@@ -1,22 +1,12 @@
-function make_my_hypercube(app) {
+function twoDimensions(app, dim1, dim2) {
     var hyperCubeDef = {
         qDimensions: [
-        {
-            qDef: {
-                qFieldDefs: ['Country']
-            }
-        },
-        // {
-        //     qDef: {
-        //         qFieldDefs: ['Partner List']
-        //     }
-        // }
-        ],
-        qMeasures: [
           {
-            qDef: { qDef: '=count([Commitment Title])' },
-            qSortBy: { qSortByNumeric: true }
-          }         
+              qDef: { qFieldDefs: [dim1] }
+          },
+          {
+              qDef: { qFieldDefs: [dim2] }
+          }
         ],
         qInterColumnSortOrder: [2, 0, 1],
         qInitialDataFetch: [
@@ -29,24 +19,38 @@ function make_my_hypercube(app) {
         ]
     }
     app.createCube(hyperCubeDef, hypercube => {
-        // after creating a cube you define a callback function to handle it
-        // this function will be called each time the data changes (ie. when
-        // someone makes a selection).
-
-
-        // the basic matrix of data is available in the hypercube datapages
         let matrix = hypercube.qHyperCube.qDataPages[0].qMatrix
-
-            // you can then treat the matrix as an array
+        var list = []
             matrix.forEach((row, index) => {
-                // the value for each column can be obtained by referencing array indexes
-                // you can use qText for text values and qNum for numerical
-                console.log("Country:", row[0].qText)
-                // let partners = row[1].qText.split(",")
-                // partners.forEach((partner, index) => {
-                //   console.log("Partner ", index, " : ", partner)
-                // })
-                console.log("Commitment title count : " , row[1].qText)
+                var obj = {}
+                // if row[0] have multiple things
+                if (row[0].qText.includes(",") == true) {
+                  let dimension1 = row[0].qText.split(",")
+                  var row0 = []
+                  dimension1.forEach((dim, index) => {
+                    console.log(`${dim1} ${index}: ${dim}`)
+                    row0.push[dim]
+                  })
+                  obj[dim1] = row0
+                } else {
+                  obj[dim1] = row[0].qText
+                  console.log(`${dim1}` + ":", row[0].qText)
+                }
+
+                //if row[1] have multiple things
+                if (row[1].qText.includes(",") == true) {
+                  let dimension2 = row[1].qText.split(",")
+                  var row1 = []
+                  dimension2.forEach((dim, index) => {
+                    console.log(`${dim2} ${index}: ${dim}`)
+                  })
+                  obj[dim2] = row1
+                } else {
+                  obj[dim2] = row[1].qText
+                  console.log(`${dim2}` + ":", row[0].qText)
+                }
+                list.push(obj)
+                return list
             })
     })
 }
@@ -86,8 +90,9 @@ function main() {
         })
 
         // Open a dataset on the server
-        app = qlik.openApp(config.appname, config)
+        app = qlik.openApp(config.appname, config) 
         console.log("App Opened", app)
-        make_my_hypercube(app);
+        var ret_list = twoDimensions(app, 'Commitment Title', 'Partner List'); // example 
+
     })
 }
