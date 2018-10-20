@@ -91,7 +91,7 @@ function main() {
       var ret = twoDimensions(app, 'Partner List', 'Lead entity')
       ret.then((response) => {
          ret_list = response
-      })  
-      console.log(response[0]["Lead entity"]) // example
+         console.log(response[0]["Lead entity"]) // example
+      })
   })
 }
