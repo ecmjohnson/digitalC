@@ -18,41 +18,30 @@ function twoDimensions(app, dim1, dim2) {
         }
         ]
     }
-    return app.createCube(hyperCubeDef, hypercube => {
+    var list = []
+    app.createCube(hyperCubeDef, hypercube => {
         let matrix = hypercube.qHyperCube.qDataPages[0].qMatrix
-        var list = []
             matrix.forEach((row, index) => {
                 var obj = {}
                 // if row[0] have multiple things
                 if (row[0].qText.includes(",") == true) {
                   let dimension1 = row[0].qText.split(",")
-                  var row0 = []
-                  dimension1.forEach((dim, index) => {
-                    console.log(`${dim1} ${index}: ${dim}`)
-                    row0.push[dim]
-                  })
-                  obj[dim1] = row0
+                  obj[dim1] = dimension1
                 } else {
                   obj[dim1] = row[0].qText
-                  console.log(`${dim1}` + ":", row[0].qText)
                 }
 
                 //if row[1] have multiple things
                 if (row[1].qText.includes(",") == true) {
                   let dimension2 = row[1].qText.split(",")
-                  var row1 = []
-                  dimension2.forEach((dim, index) => {
-                    console.log(`${dim2} ${index}: ${dim}`)
-                  })
-                  obj[dim2] = row1
+                  obj[dim2] = dimension2
                 } else {
                   obj[dim2] = row[1].qText
-                  console.log(`${dim2}` + ":", row[0].qText)
                 }
                 list.push(obj)
-                return list
             })
     })
+    return list
 }
 
 // this is the config object used to connect to an app on a Qlik Sense server
@@ -76,41 +65,24 @@ function main() {
       'resources'
   })
 
+
   /**
    * Load the entry point for the Capabilities API family
    * See full documention:
    * https://help.qlik.com/en-US/sense-developer/September2018/Subsystems/APIs/Content/Sense_ClientAPIs/CapabilityAPIs/qlik-interface-interface.htm
    */
   require(['js/qlik'], function(qlik) {
-    // We're now connected
+      // We're now connected
 
-    // Suppress Qlik error dialogs and handle errors how you like.
-    qlik.setOnError(function(error) {
-      console.log('ERROR', error)
-    })
+      // Suppress Qlik error dialogs and handle errors how you like.
+      qlik.setOnError(function(error) {
+          console.log('ERROR', error)
+      })
 
-    // Open a dataset on the server
-    app = qlik.openApp(config.appname, config)
-    console.log("App Opened", app)
+      // Open a dataset on the server
+      app = qlik.openApp(config.appname, config)
+      console.log("App Opened", app)
+      var ret_list = twoDimensions(app, 'Commitment Title', 'Partner List'); // example
+      console.log(ret_list)
   })
-
-    /**
-     * Load the entry point for the Capabilities API family
-     * See full documention:
-     * https://help.qlik.com/en-US/sense-developer/September2018/Subsystems/APIs/Content/Sense_ClientAPIs/CapabilityAPIs/qlik-interface-interface.htm
-     */
-    require(['js/qlik'], function(qlik) {
-        // We're now connected
-
-        // Suppress Qlik error dialogs and handle errors how you like.
-        qlik.setOnError(function(error) {
-            console.log('ERROR', error)
-        })
-
-        // Open a dataset on the server
-        app = qlik.openApp(config.appname, config)
-        console.log("App Opened", app)
-        var ret_list = twoDimensions(app, 'Commitment Title', 'Partner List'); // example
-        alert(ret_list)
-    })
 }
