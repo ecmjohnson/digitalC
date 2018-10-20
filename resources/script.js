@@ -58,7 +58,7 @@ var config = {
     port: '443',
     isSecure: true,
     rejectUnauthorized: false,
-    appname: '0b0fc6d5-05ce-44d7-95aa-80d0680b3559'
+    appname: '1a95d089-d275-466b-ae89-695a226048c4'
 }
 
 function main() {
