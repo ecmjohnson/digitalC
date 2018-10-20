@@ -19,7 +19,7 @@
 
 <body>
   <h1></h1>
-  <div class="bars"></div>
+  <div id="bar"><div class="bars"></div></div>
   <div id="map"></div>
   <div id="pie"></div>
 
@@ -28,7 +28,8 @@
   <script type="text/javascript">
     d3.select("h1").text("Simple d3 using verion " + d3.version);
 
-    var data = [1, 8, 15, 16, 23, 42];
+    // Bar chart
+    var data = [1, 8, 15, 16, 23, 42, 35, 4, 20, 15, 2, 40, 4, 20, 15, 2, 40];
 
     var x = d3.scale.linear()
         .domain([0, d3.max(data)])
@@ -41,7 +42,7 @@
             .style("width", function(d) { return x(d) + "px"; })
             .text(function(d) { return d; });
 
-
+    // Map chart
     $(document).ready(function(){
         var w = 1000;
         var h = 480;
@@ -79,16 +80,17 @@
         
     })
 
+    // Pie chart
     var pie = new d3pie("pie", {data: {
-	sortOrder: "none",
-	content: [
-		{ label: "label 1", value: 8, color: "#cccccc" },
-		{ label: "label 2", value: 5, color: "#bbbbbb" },
-		{ label: "label 3", value: 2, color: "#aaaaaa" },
-		{ label: "label 4", value: 3, color: "#999999" },
-		{ label: "label 5", value: 2, color: "#888888" }
-	]
-}});
+        sortOrder: "none",
+        content: [
+            { label: "label 1", value: 8, color: "#cccccc" },
+            { label: "label 2", value: 5, color: "#bbbbbb" },
+            { label: "label 3", value: 2, color: "#aaaaaa" },
+            { label: "label 4", value: 3, color: "#999999" },
+            { label: "label 5", value: 2, color: "#888888" }
+        ]
+    }});
 
     main();
   </script>

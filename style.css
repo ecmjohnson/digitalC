@@ -7,6 +7,10 @@
     color: white;
   }
 
+#bar {
+    float: left;
+}
+
 
 body { 
     background-color:lightgray;
@@ -33,3 +37,7 @@ body {
     color: black;
     position: absolute;
   }
+
+#pie {
+    float: right;
+}
