@@ -1,8 +1,35 @@
-.chart div {
+.bars div {
     font: 10px sans-serif;
     background-color: red;
     text-align: right;
     padding: 3px;
     margin: 1px;
     color: white;
+  }
+
+
+body { 
+    background-color:lightgray;
+    text-align: center;
+  }
+  
+  h1, h3, p{
+    text-align: center;
+  }
+  
+  path{
+    stroke: lightblue;
+    stroke-width: 0.5px;
+    fill: blue;
+  }
+  
+  #tooltip{
+    text-align: left;
+    padding: 16px;
+    background-color:lightblue;
+    border: 1px solid black;
+    width: auto;
+    opacity: 0;
+    color: black;
+    position: absolute;
   }
