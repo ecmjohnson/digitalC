@@ -16,6 +16,8 @@ function add_liquid_gauge(svg_settings, id, init_val, config = 0)
         liqConfig.waveAnimateTime = 2000;
         liqConfig.waveHeight = 0.25;
         liqConfig.waveCount = 1;
+    } else {
+        liqConfig = config;
     }
 
     // Create and return the liquid gauge

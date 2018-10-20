@@ -28,19 +28,37 @@
   <script type="text/javascript">
 
     var svg1_settings = [];
-    svg1_settings.push(["width", "50%"]);
+    svg1_settings.push(["width", "33%"]);
     svg1_settings.push(["height", "250"]);
     svg1_settings.push(["float", "left"]);
     var liqGauge1 = add_liquid_gauge(svg1_settings, "fillgauge1", 50);
 
     var svg2_settings = [];
-    svg2_settings.push(["width", "50%"]);
+    svg2_settings.push(["width", "33%"]);
     svg2_settings.push(["height", "250"]);
     svg2_settings.push(["float", "right"]);
     var liqGauge2 = add_liquid_gauge(svg2_settings, "fillgauge2", 20);
 
-    update_liquid_gauge(liqGauge1, 10)
+    var svg3_settings = [];
+    svg3_settings.push(["width", "33%"]);
+    svg3_settings.push(["height", "250"]);
+    svg3_settings.push(["float", "center"]);
+    var gauge_config = liquidFillGaugeDefaultSettings();
+    gauge_config.circleColor = "#D4AB6A";
+    gauge_config.textColor = "#553300";
+    gauge_config.waveTextColor = "#805615";
+    gauge_config.waveColor = "#AA7D39";
+    gauge_config.circleThickness = 0.1;
+    gauge_config.circleFillGap = 0.1;
+    gauge_config.textVertPosition = 0.8;
+    gauge_config.waveAnimateTime = 1000;
+    gauge_config.waveHeight = 0.3;
+    gauge_config.waveCount = 3;
+    var liqGauge3 = add_liquid_gauge(svg3_settings, "fillgauge3", 99, gauge_config);
+
+    update_liquid_gauge(liqGauge1, 10);
     update_liquid_gauge(liqGauge2, 75);
+    update_liquid_gauge(liqGauge3, 40);
 
     main();
   </script>
