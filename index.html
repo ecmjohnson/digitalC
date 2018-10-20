@@ -25,6 +25,7 @@
   <script type="text/javascript" src="https://playground-sense.qlik.com/showcase/resources/assets/external/requirejs/require.js"></script>
   <script type="text/javascript" src="/resources/script.js"></script>
   <script type="text/javascript">
+
     d3.select("h1").text("Simple d3 using verion " + d3.version);
 
     // Bar chart
@@ -78,8 +79,10 @@
         })
         
     })
-
-    main();
+  function test_cb(data) {
+      console.log(data[0]["Lead entity"]);
+  }
+    main(test_cb);
   </script>
 </body>
 

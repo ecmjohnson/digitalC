@@ -60,33 +60,37 @@ var config = {
     appname: '1a95d089-d275-466b-ae89-695a226048c4'
 }
 
-function main() {
-    // our API uses requirejs, so here we're setting up our base URL
-    require.config({
-        baseUrl:
-            (config.isSecure ? 'https://' : 'http://') +
-            config.host +
-            (config.port ? ':' + config.port : '') +
-            config.prefix +
-            'resources'
-    })
-
-    /**
-     * Load the entry point for the Capabilities API family
-     * See full documention:
-     * https://help.qlik.com/en-US/sense-developer/September2018/Subsystems/APIs/Content/Sense_ClientAPIs/CapabilityAPIs/qlik-interface-interface.htm
-     */
-    require(['js/qlik'], function(qlik) {
-        // We're now connected
+function main(callback_fnc) {
+  // our API uses requirejs, so here we're setting up our base URL
+  require.config({
+    baseUrl:
+      (config.isSecure ? 'https://' : 'http://') +
+      config.host +
+      (config.port ? ':' + config.port : '') +
+      config.prefix +
+      'resources'
+  })
+  /**
+   * Load the entry point for the Capabilities API family
+   * See full documention:
+   * https://help.qlik.com/en-US/sense-developer/September2018/Subsystems/APIs/Content/Sense_ClientAPIs/CapabilityAPIs/qlik-interface-interface.htm
+   */
+  require(['js/qlik'], function(qlik) {
+      // We're now connected
 
         // Suppress Qlik error dialogs and handle errors how you like.
         qlik.setOnError(function(error) {
             console.log('ERROR', error)
         })
 
-        // Open a dataset on the server
-        app = qlik.openApp(config.appname, config)
-        console.log("App Opened", app)
-        make_my_hypercube(app);
-    })
+      // Open a dataset on the server
+      app = qlik.openApp(config.appname, config)
+      console.log("App Opened", app)
+      var ret_list
+      var ret = twoDimensions(app, 'Partner List', 'Lead entity')
+      ret.then((response) => {
+         ret_list = response
+         callback_fnc(ret_list);
+      })
+  })
 }
