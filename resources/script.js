@@ -8,8 +8,11 @@ var config = {
   appname: '0b0fc6d5-05ce-44d7-95aa-80d0680b3559'
 }
 
+var app;
+
 function main() {
   // our API uses requirejs, so here we're setting up our base URL
+
   require.config({
     baseUrl:
       (config.isSecure ? 'https://' : 'http://') +
@@ -35,5 +38,49 @@ function main() {
     // Open a dataset on the server
     app = qlik.openApp(config.appname, config)
     console.log("App Opened", app)
+
+    let goals = {
+        qDef: {
+          qFieldDefs: ["Goal ID"],
+          qSortCriterias: [{ qSortByState: 1 }, { qSortByAscii: 1 }]
+        },
+        qInitialDataFetch: [
+          {
+            qTop: 0,
+            qLeft: 0,
+            qHeight: 2000,
+            qWidth: 1
+          }
+        ]
+      }
+
+
+    function createGoalList(response) {
+
+        const list = document.getElementById('goalsList');
+
+        // here we can see the actual list of data is available in the qListObject
+        response.qListObject.qDataPages[0].qMatrix.forEach( row => {
+
+            var goal = document.createElement("div");
+            // and give it some content
+            var goalContent = document.createTextNode(`${row[0].qText}`);
+            // add the text node to the newly created div
+            goal.appendChild(goalContent);
+
+            list.addEventListener("click", () => {
+                // on click we can have the selection of the value toggled
+                app.field("Goal ID").selectValues([row[0].qText], true, true)
+            });
+
+            list.appendChild(goal);
+        })
+    }
+
+      app.createList(goals, createGoalList);
+
+
   })
+
+
 }
