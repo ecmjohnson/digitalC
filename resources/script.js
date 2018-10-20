@@ -18,7 +18,7 @@ function twoDimensions(app, dim1, dim2) {
         }
         ]
     }
-    app.createCube(hyperCubeDef, hypercube => {
+    return app.createCube(hyperCubeDef, hypercube => {
         let matrix = hypercube.qHyperCube.qDataPages[0].qMatrix
         var list = []
             matrix.forEach((row, index) => {
@@ -108,9 +108,9 @@ function main() {
         })
 
         // Open a dataset on the server
-        app = qlik.openApp(config.appname, config) 
+        app = qlik.openApp(config.appname, config)
         console.log("App Opened", app)
-        var ret_list = twoDimensions(app, 'Commitment Title', 'Partner List'); // example 
-
+        var ret_list = twoDimensions(app, 'Commitment Title', 'Partner List'); // example
+        alert(ret_list)
     })
 }
