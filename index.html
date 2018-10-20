@@ -14,7 +14,6 @@
   <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
   <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
   <script type="text/javascript" src="https://unpkg.com/topojson@3"></script>
-  <script type="text/javascript" src="/resources/d3pie.min.js"></script>
 </head>
 
 <body>
@@ -79,18 +78,6 @@
         })
         
     })
-
-    // Pie chart
-    var pie = new d3pie("pie", {data: {
-        sortOrder: "none",
-        content: [
-            { label: "label 1", value: 8, color: "#cccccc" },
-            { label: "label 2", value: 5, color: "#bbbbbb" },
-            { label: "label 3", value: 2, color: "#aaaaaa" },
-            { label: "label 4", value: 3, color: "#999999" },
-            { label: "label 5", value: 2, color: "#888888" }
-        ]
-    }});
 
     main();
   </script>
