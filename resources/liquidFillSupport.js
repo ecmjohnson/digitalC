@@ -14,7 +14,7 @@ function add_liquid_gauge(svg_settings, id, init_val, config = 0)
         liqConfig.circleFillGap = 0.1;
         liqConfig.textVertPosition = 0.8;
         liqConfig.waveAnimateTime = 2000;
-        liqConfig.waveHeight = 0.2;
+        liqConfig.waveHeight = 0.25;
         liqConfig.waveCount = 1;
     }
 

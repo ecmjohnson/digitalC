@@ -26,12 +26,21 @@
   <script type="text/javascript" src="/resources/script.js"></script>
 
   <script type="text/javascript">
-  
-    var svg_settings = [];
-    svg_settings.push(["width", "97%"]);
-    svg_settings.push(["height", "250"]);
-    var liqGauge = add_liquid_gauge(svg_settings, "fillgauge1", 50);
-    update_liquid_gauge(liqGauge, 10)
+
+    var svg1_settings = [];
+    svg1_settings.push(["width", "50%"]);
+    svg1_settings.push(["height", "250"]);
+    svg1_settings.push(["float", "left"]);
+    var liqGauge1 = add_liquid_gauge(svg1_settings, "fillgauge1", 50);
+
+    var svg2_settings = [];
+    svg2_settings.push(["width", "50%"]);
+    svg2_settings.push(["height", "250"]);
+    svg2_settings.push(["float", "right"]);
+    var liqGauge2 = add_liquid_gauge(svg2_settings, "fillgauge2", 20);
+
+    update_liquid_gauge(liqGauge1, 10)
+    update_liquid_gauge(liqGauge2, 75);
 
     main();
   </script>
