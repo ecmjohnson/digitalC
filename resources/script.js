@@ -3,7 +3,7 @@ function make_my_hypercube(app) {
         qDimensions: [
         {
             qDef: {
-                qFieldDefs: ['Country']
+                qFieldDefs: ['Commitment Title']
             }
         },
         // {
@@ -14,16 +14,16 @@ function make_my_hypercube(app) {
         ],
         qMeasures: [
           {
-            qDef: { qDef: '=count([Commitment Title])' },
+            qDef: { qDef: '=count([Partners])' },
             qSortBy: { qSortByNumeric: true }
-          }         
+          }
         ],
-        qInterColumnSortOrder: [2, 0, 1],
+        qInterColumnSortOrder: [1,0],
         qInitialDataFetch: [
         {
             qTop: 0,
             qLeft: 0,
-            qHeight: 200,
+            qHeight: 2500,
             qWidth: 3
         }
         ]
@@ -41,12 +41,12 @@ function make_my_hypercube(app) {
             matrix.forEach((row, index) => {
                 // the value for each column can be obtained by referencing array indexes
                 // you can use qText for text values and qNum for numerical
-                console.log("Country:", row[0].qText)
+                console.log("Commitment title:", row[0].qText)
                 // let partners = row[1].qText.split(",")
                 // partners.forEach((partner, index) => {
                 //   console.log("Partner ", index, " : ", partner)
                 // })
-                console.log("Commitment title count : " , row[1].qText)
+                console.log("Partners count : " , row[1].qText)
             })
     })
 }
