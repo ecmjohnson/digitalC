@@ -10,12 +10,12 @@ function add_liquid_gauge(svg_settings, id, init_val, config = 0)
     // Configure the default fill gauge settings, if not provided
     if (config === 0) {
         var liqConfig = liquidFillGaugeDefaultSettings();
-        liqConfig.circleThickness = 0.1;
-        liqConfig.circleFillGap = 0.1;
-        liqConfig.textVertPosition = 0.8;
+        liqConfig.circleThickness = 0.21;
+        liqConfig.circleFillGap = 0.08;
+        liqConfig.textVertPosition = 0.5;
         liqConfig.waveAnimateTime = 2000;
-        liqConfig.waveHeight = 0.25;
-        liqConfig.waveCount = 1;
+        liqConfig.waveHeight = 0.2;
+        liqConfig.waveCount = 1.75;
     } else {
         liqConfig = config;
     }
