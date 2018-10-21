@@ -168,10 +168,17 @@
                 //d3.select('#name').text(d.properties.name);
                 //d3.select('#name').text(d.properties.name);
                 //d3.select('#name').text(d.properties.name);
+                //var countryName = datum.properties.name
+                //$('#countryName').html(countryName)
+                //$('#commitmentsNum').html(dataSet[0][countryName]["Commitment Title]"])
+                //$('#indicatorsNum').html(dataSet[4][countryName]["Indicator ID"])
+                //$('#targetsNum').html(dataSet[6][countryName])
+                //$('#oceansName').html(dataSet[3][countryName])
+                //$('#entitiesNum').html(dataSet[2][countryName])
 
                 d3.select('#tooltip')
-                .style('left', (d3.event.pageX - 30)+ 'px')
-                .style('top', (d3.event.pageY - 150)+ 'px')
+                .style('left', (d3.event.pageX)+ 'px')
+                .style('top', (d3.event.pageY)+ 'px')
                 .style('display','block')
                 .style('opacity', 0.8)
               });
@@ -261,6 +268,7 @@
         </div>
         <div id="tooltip" data-toggle="tooltip">
           Country: <span id="countryName" class="info"></span><br>
+          Commitments: <span id="commitmentsNum" class="info"></span><br>
           Goals: <span id="goalsNum" class="info"></span><br>
           SDG Targets: <span id="targetsNum" class="info"></span><br>
           Indicators: <span id="indicatorsNum" class="info"></span><br>
@@ -282,6 +290,7 @@
           var fromTop = $("body").scrollTop();
           $('body').toggleClass("down", (fromTop > 120));
         });
+      })
     </script>
 
     <script>
