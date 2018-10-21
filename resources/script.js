@@ -94,7 +94,7 @@ var config = {
   appname: '1a95d089-d275-466b-ae89-695a226048c4'
 }
 
-function main(update_top_displays_cb) {
+function main(update_top_displays_cb, update_network_display_cb) {
   // our API uses requirejs, so here we're setting up our base URL
   require.config({
     baseUrl:
@@ -132,6 +132,7 @@ function main(update_top_displays_cb) {
       dim_measure(app, 'Country', thing, 'count').then((response) => {
         console.log("Number of " + thing + " for every Country")
         console.log(response)
+        update_network_display_cb(thing, response);
       })
     })
   })

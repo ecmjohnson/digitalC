@@ -316,6 +316,7 @@
     var liqGauge3 = add_liquid_gauge(svg3_settings, "fillgauge3", 0/*, gauge_config*/);
 
     function update_top_displays_cb(data) {
+        console.log(data);
         if (data[4].includes("Commitment Title-Partners")) {
             // Top commitments
             update_liquid_gauge(liqGauge1, data[3].toFixed(1));
@@ -327,20 +328,26 @@
             update_liquid_gauge(liqGauge3, data[3].toFixed(1));
         }
     }
-    
-    var network = {nodes:[], links:[]};
-    add_node_network(network, "Elizabeth Bennet", 1);
-    add_node_network(network, "Jane Bennet", 2);
-    add_node_network(network, "Mary Bennet", 2);
-    add_node_network(network, "Kitty Bennet", 2);
-    add_link_network(network, 0, 1, 1);
-    add_link_network(network, 0, 2, 1);
-    add_link_network(network, 0, 3, 2);
 
-    display_network("#relationship-section", 960, 500, network)
+    var num_cbs = 0;
+    function update_network_display_cb(thing, data) {
+        num_cbs = num_cbs + 1;
+        var network = {nodes:[], links:[]};
+        add_node_network(network, "Elizabeth Bennet", 1);
+        add_node_network(network, "Jane Bennet", 2);
+        add_node_network(network, "Mary Bennet", 2);
+        add_node_network(network, "Kitty Bennet", 2);
+        add_link_network(network, 0, 1, 1);
+        add_link_network(network, 0, 2, 1);
+        add_link_network(network, 0, 3, 2);
+
+        if (num_cbs == 5) {
+            display_network("#relationship-section", 960, 500, network)
+        }
+    }
 
     // Main program
-    main(update_top_displays_cb);
+    main(update_top_displays_cb, update_network_display_cb);
 
   </script>
 </body>
