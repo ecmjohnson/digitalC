@@ -202,9 +202,9 @@
                             <span>3</span>
     
                             <ul>
-                                <li>Company 1</li>
-                                <li>Company 2</li>
-                                <li>Company 3</li>
+                                <li id="commit1">Commitment 1</li>
+                                <li id="commit2">Commitment 2</li>
+                                <li id="commit3">Commitment 3</li>
                             </ul>
     
                             <div id="gauge1">
@@ -299,6 +299,9 @@
     function update_top_displays_cb(data) {
         if (data[4].includes("Commitment Title-Partners")) {
             // Top commitments
+            document.getElementById("commit1").innerHTML = data[0][0].qText;
+            document.getElementById("commit2").innerHTML = data[1][0].qText;
+            document.getElementById("commit3").innerHTML = data[2][0].qText;
             update_liquid_gauge(liqGauge1, data[3].toFixed(1));
         } else if (data[4].includes("Country-Partners")) {
             // Top partners
