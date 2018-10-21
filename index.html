@@ -190,6 +190,47 @@
 
             </section>
 
+            <section class="top3">
+
+
+                    <div class="top3Containers">
+                        <h2 class ="top3Title">Commitments</h2>
+    
+                        <div class="top3Content">
+    
+                            <div class="top3Label">Top </div>
+                            <span>3</span>
+    
+                            <ul>
+                                <li>Company 1</li>
+                                <li>Company 2</li>
+                                <li>Company 3</li>
+                            </ul>
+    
+                            <div id="gauge1">
+                                
+                            </div>
+    
+    
+                        </div>
+    
+                    </div>
+    
+    
+    
+                    <div class="top3Containers">
+                        <h2>Partners</h2>
+                        <div id="gauge2">
+                                
+                            </div>
+                    </div>
+                    <div class="top3Containers">
+                        <h2>Entities</h2>
+                        <div id="gauge3">
+                                
+                            </div>
+    </div>
+
         </div>
     </div>
 
@@ -227,20 +268,20 @@
   <script type="text/javascript">
 
     var svg1_settings = [];
-    svg1_settings.push(["width", "33%"]);
-    svg1_settings.push(["height", "250"]);
+    svg1_settings.push(["width", "100%"]);
+    svg1_settings.push(["height", "100"]);
     svg1_settings.push(["float", "left"]);
-    var liqGauge1 = add_liquid_gauge(svg1_settings, "fillgauge1", 0);
+    var liqGauge1 = add_liquid_gauge(svg1_settings, "#gauge1", "fillgauge1", 0);
 
     var svg2_settings = [];
-    svg2_settings.push(["width", "33%"]);
-    svg2_settings.push(["height", "250"]);
+    svg2_settings.push(["width", "100%"]);
+    svg2_settings.push(["height", "100"]);
     svg2_settings.push(["float", "right"]);
-    var liqGauge2 = add_liquid_gauge(svg2_settings, "fillgauge2", 0);
+    var liqGauge2 = add_liquid_gauge(svg2_settings, "#gauge2", "fillgauge2", 0);
 
     var svg3_settings = [];
-    svg3_settings.push(["width", "33%"]);
-    svg3_settings.push(["height", "250"]);
+    svg3_settings.push(["width", "100%"]);
+    svg3_settings.push(["height", "100"]);
     svg3_settings.push(["float", "center"]);
     // var gauge_config = liquidFillGaugeDefaultSettings();
     // gauge_config.circleColor = "#D4AB6A";
@@ -253,7 +294,7 @@
     // gauge_config.waveAnimateTime = 1000;
     // gauge_config.waveHeight = 0.3;
     // gauge_config.waveCount = 3;
-    var liqGauge3 = add_liquid_gauge(svg3_settings, "fillgauge3", 0/*, gauge_config*/);
+    var liqGauge3 = add_liquid_gauge(svg3_settings, "#gauge3", "fillgauge3", 0/*, gauge_config*/);
 
     function update_top_displays_cb(data) {
         if (data[4].includes("Commitment Title-Partners")) {

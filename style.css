@@ -128,3 +128,35 @@ footer {
   footer a:hover {
     color: #64B5F6
   }
+
+
+.top3 {
+    display: flex;
+    justify-content: space-between;
+}
+
+h2.top3Title {
+    font-size: 30px;
+}
+
+.top3Content {
+    display: flex;
+    margin-top: 10px;
+}
+
+.top3Label {
+    margin-right: 30px;
+    text-align: center;
+}
+
+span {
+    position: relative;
+    top: 11px;
+    right: 52px;
+    font-size: 60px;
+}
+
+li {
+    list-style: none;
+    margin-bottom: 10px;
+}
