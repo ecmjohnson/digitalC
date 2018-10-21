@@ -168,13 +168,14 @@
                 //d3.select('#name').text(d.properties.name);
                 //d3.select('#name').text(d.properties.name);
                 //d3.select('#name').text(d.properties.name);
-                //var countryName = datum.properties.name
-                //$('#countryName').html(countryName)
-                //$('#commitmentsNum').html(dataSet[0][countryName]["Commitment Title]"])
-                //$('#indicatorsNum').html(dataSet[4][countryName]["Indicator ID"])
-                //$('#targetsNum').html(dataSet[6][countryName])
-                //$('#oceansName').html(dataSet[3][countryName])
-                //$('#entitiesNum').html(dataSet[2][countryName])
+                var countryName = datum.properties.name
+                console.log(dataSet)
+                $('#countryName').html(countryName)
+                $('#commitmentsNum').html(dataSet[0][countryName]["Commitment Title"])
+                $('#indicatorsNum').html(dataSet[4][countryName]["Indicator ID"])
+                $('#targetsNum').html(dataSet[6][countryName]["Target Title"])
+                $('#oceansName').html(dataSet[3][countryName]["Ocean Basins"])
+                $('#entitiesNum').html(dataSet[2][countryName]["Lead entity"])
 
                 d3.select('#tooltip')
                 .style('left', (d3.event.pageX)+ 'px')
@@ -229,39 +230,39 @@
 
                     <div class="top3Containers">
                         <h2 class ="top3Title">Commitments</h2>
-    
+
                         <div class="top3Content">
-    
+
                             <div class="top3Label">Top </div>
                             <span>3</span>
-    
+
                             <ul>
                                 <li id="commit1">Commitment 1</li>
                                 <li id="commit2">Commitment 2</li>
                                 <li id="commit3">Commitment 3</li>
                             </ul>
-    
+
                             <div id="gauge1">
-                                
+
                             </div>
-    
-    
+
+
                         </div>
-    
+
                     </div>
-    
-    
-    
+
+
+
                     <div class="top3Containers">
                         <h2>Partners</h2>
                         <div id="gauge2">
-                                
+
                             </div>
                     </div>
                     <div class="top3Containers">
                         <h2>Entities</h2>
                         <div id="gauge3">
-                                
+
                             </div>
     </div>
 
