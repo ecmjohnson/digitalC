@@ -1,11 +1,4 @@
-.title {
-    /*padding-bottom: 30px;*/
-}
-
-#goalsList {
-    margin-left: 15px;
-}
-
+/* Styles */
 header {
     background-color: #007DBC;
     height: 90px;
@@ -17,7 +10,7 @@ header {
 }
 
 .headerContent {
-    align-items:
+    align-items: center;
 }
 
 .sticky {
@@ -68,6 +61,11 @@ section {
     font-family: 'Anton', sans-serif;
 }
 
+.top3 {
+    display: flex;
+    justify-content: space-between;
+}
+
 body {
     background-color: lightgray;
 }
@@ -80,6 +78,10 @@ h2 {
 p {
     font-family: 'Oswald', sans-serif;
     font-weight: 200;
+}
+
+h2.top3Title {
+    font-size: 30px;
 }
 
 .info {
@@ -96,6 +98,16 @@ path {
     fill: blue;
 }
 
+.top3Content {
+    display: flex;
+    margin-top: 10px;
+}
+
+.top3Label {
+    margin-right: 30px;
+    text-align: center;
+}
+
 #tooltip {
     text-align: left;
     padding: 16px;
@@ -105,4 +117,16 @@ path {
     opacity: 0;
     color: black;
     position: absolute;
+}
+
+span {
+    position: relative;
+    top: 11px;
+    right: 52px;
+    font-size: 60px;
+}
+
+li {
+    list-style: none;
+    margin-bottom: 10px;
 }

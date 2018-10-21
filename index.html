@@ -17,7 +17,8 @@
     <script src="//d3js.org/topojson.v1.min.js"></script>
     <script type="text/javascript" src="/resources/liquidFillGauge.js"></script>
     <script type="text/javascript" src="/resources/liquidFillSupport.js"></script>
-  </head>
+</head>
+
 <body>
     <div id="container">
 
@@ -137,7 +138,7 @@
                         .attr('d', path)
                         .on('mouseover',mouseoverLegend).on('mouseout',mouseoutLegend)
                         .on('click', coutryclicked);
-                    
+
                     countries.append('svg:text')
                         .attr('class', function(d){ return 'subunit-label la'+d.id+d.properties.name.replace(/[ \.#']+/g,''); })
                         //.attr('transform', function(d) { return 'translate('+ path.centroid(d) +')'; })
@@ -187,13 +188,45 @@
                 return palette[approxIdx];
             }
         </script>
-                         
+
             </section>
 
-            <section>
-                <h2>Interactive Map</h2>
-                <p class="info">To help governments and stakeholders better understand the Sustainable Development Goals, and the effects of their interacting organizations we have created an a map to highlight the impact countries have on their
-                    oceans.</p>
+            <section class="top3">
+
+
+                <div class="top3Containers">
+                    <h2 class ="top3Title">Commitments</h2>
+
+                    <div class="top3Content">
+
+                        <div class="top3Label">Top </div>
+                        <span>3</span>
+
+                        <ul>
+                            <li>Company 1</li>
+                            <li>Company 2</li>
+                            <li>Company 3</li>
+                        </ul>
+
+                        <div id="gauge">
+                            3
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="top3Containers">
+                    <h2>Partners</h2>
+                </div>
+                <div class="top3Containers">
+                    <h2>Entities</h2>
+                </div>
+
+
             </section>
 
             <section>
@@ -277,49 +310,56 @@
         main();
     </script>
 
-    <script>
-
-    </script>
-
-  <script type="text/javascript" src="https://playground-sense.qlik.com/showcase/resources/assets/external/requirejs/require.js"></script>
-  <script type="text/javascript" src="/resources/statistics.js"></script>
-
-  <script type="text/javascript">
-
-    var svg1_settings = [];
-    svg1_settings.push(["width", "33%"]);
-    svg1_settings.push(["height", "250"]);
-    svg1_settings.push(["float", "left"]);
-    var liqGauge1 = add_liquid_gauge(svg1_settings, "fillgauge1", 50);
-
-    var svg2_settings = [];
-    svg2_settings.push(["width", "33%"]);
-    svg2_settings.push(["height", "250"]);
-    svg2_settings.push(["float", "right"]);
-    var liqGauge2 = add_liquid_gauge(svg2_settings, "fillgauge2", 20);
-
-    var svg3_settings = [];
-    svg3_settings.push(["width", "33%"]);
-    svg3_settings.push(["height", "250"]);
-    svg3_settings.push(["float", "center"]);
-    var gauge_config = liquidFillGaugeDefaultSettings();
-    gauge_config.circleColor = "#D4AB6A";
-    gauge_config.textColor = "#553300";
-    gauge_config.waveTextColor = "#805615";
-    gauge_config.waveColor = "#AA7D39";
-    gauge_config.circleThickness = 0.1;
-    gauge_config.circleFillGap = 0.1;
-    gauge_config.textVertPosition = 0.8;
-    gauge_config.waveAnimateTime = 1000;
-    gauge_config.waveHeight = 0.3;
-    gauge_config.waveCount = 3;
-    var liqGauge3 = add_liquid_gauge(svg3_settings, "fillgauge3", 99, gauge_config);
-
-    update_liquid_gauge(liqGauge1, 10);
-    update_liquid_gauge(liqGauge2, 75);
-    update_liquid_gauge(liqGauge3, 40);
-
   </script>
+    <script type="text/javascript" src="https://playground-sense.qlik.com/showcase/resources/assets/external/requirejs/require.js"></script>
+    <script type="text/javascript" src="/resources/statistics.js"></script>
+
+    <script type="text/javascript">
+        let svg1_settings = []; {
+            svg1_settings.push(["width", "33%"]);
+            svg1_settings.push(["height", "250"]);
+            svg1_settings.push(["float", "left"]);
+        }
+
+        let liqGauge1 = add_liquid_gauge(svg1_settings,"#gauge1", "fillgauge1", 50);
+
+        let svg2_settings = []; {
+            svg2_settings.push(["width", "33%"]);
+            svg2_settings.push(["height", "250"]);
+            svg2_settings.push(["float", "right"]);
+        }
+
+        let liqGauge2 = add_liquid_gauge(svg2_settings, "#gauge2", "fillgauge2", 20);
+
+        let svg3_settings = [];
+        {
+            svg3_settings.push(["width", "33%"]);
+            svg3_settings.push(["height", "250"]);
+            svg3_settings.push(["float", "center"]);
+        }
+
+        let gauge_config = liquidFillGaugeDefaultSettings();
+        {
+            gauge_config.circleColor = "#D4AB6A";
+            gauge_config.textColor = "#553300";
+            gauge_config.waveTextColor = "#805615";
+            gauge_config.waveColor = "#AA7D39";
+            gauge_config.circleThickness = 0.1;
+            gauge_config.circleFillGap = 0.1;
+            gauge_config.textVertPosition = 0.8;
+            gauge_config.waveAnimateTime = 1000;
+            gauge_config.waveHeight = 0.3;
+            gauge_config.waveCount = 3;
+        }
+
+        let liqGauge3 = add_liquid_gauge(svg3_settings, "#gauge3", "fillgauge3", 99, gauge_config);
+
+        update_liquid_gauge(liqGauge1, 10);
+        update_liquid_gauge(liqGauge2, 75);
+        update_liquid_gauge(liqGauge3, 40);
+
+        main();
+    </script>
 </body>
 
 </html>

@@ -1,7 +1,9 @@
-function add_liquid_gauge(svg_settings, id, init_val, config = 0)
+function add_liquid_gauge(svg_settings, containerLoction, id, init_val, config = 0)
 {
+
+
     // Create the svg for the liquid fill gauge
-    var svg = d3.select("body").append("svg");
+    var svg = d3.select(containerLoction).append("svg");
     svg_settings.forEach(setting => {
         svg.attr(setting[0], setting[1]);
     });
