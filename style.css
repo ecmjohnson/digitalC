@@ -142,6 +142,7 @@ h2.top3Title {
 .top3Content {
     display: flex;
     margin-top: 10px;
+    width: 40%;
 }
 
 .top3Label {
