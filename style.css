@@ -149,7 +149,7 @@ h2.top3Title {
     text-align: center;
 }
 
-span {
+span.top3-span {
     position: relative;
     top: 11px;
     right: 52px;
