@@ -110,28 +110,29 @@ function main() {
    * https://help.qlik.com/en-US/sense-developer/September2018/Subsystems/APIs/Content/Sense_ClientAPIs/CapabilityAPIs/qlik-interface-interface.htm
    */
   require(['js/qlik'], function(qlik) {
-      // We're now connected
+    // We're now connected
 
-      // Suppress Qlik error dialogs and handle errors how you like.
-      qlik.setOnError(function(error) {
-          console.log('ERROR', error)
+    // Suppress Qlik error dialogs and handle errors how you like.
+    qlik.setOnError(function(error) {
+        console.log('ERROR', error)
+    })
+
+    // Open a dataset on the server
+    app = qlik.openApp(config.appname, config)
+    console.log("App Opened", app)
+
+    get_top_commitments(app);
+    
+    twoDimensions(app, 'Partner List', 'Lead entity').then((response) => {
+      //console.log(response[4]["Lead entity"])  
+    }) 
+
+    var listOfStuff =['Commitment Title', 'Partners', 'Lead entity', 'Ocean Basins', 'Indicator ID']
+    listOfStuff.forEach((thing, index) => {
+      dim_measure(app, 'Country', thing, 'count').then((response) => {
+        console.log("Number of " + thing + " for every Country")
+        console.log(response)
       })
-
-      // Open a dataset on the server
-      app = qlik.openApp(config.appname, config)
-      console.log("App Opened", app)
-
-      //var ret_list = twoDimensions(app, 'Partner List', 'Lead entity'); // example
-      get_top_commitments(app);
-      //console.log(ret_list)
-
-      twoDimensions(app, 'Partner List', 'Lead entity').then((response) => {
-        console.log(response[4]["Lead entity"])  
-      }) 
-
-      dim_measure(app, 'Country', 'Commitment Title', 'count').then((response) => {
-        console.log(response[100]['Country'])
-      })
-
+    })
   })
 }
