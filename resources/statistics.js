@@ -58,8 +58,8 @@ function create_top_cube(app, dim1, measurement, my_callback) {
     })
 }
 
-function get_top_commitments(app, update_liquid_gauges_cb) {
-    commitment_list = create_top_cube(app, "Commitment Title", "Partners", update_liquid_gauges_cb)
-    partners_list = create_top_cube(app, "Country", "Partners", update_liquid_gauges_cb)
-    entities_list = create_top_cube(app, "Partners", "Lead entity", update_liquid_gauges_cb)
+function get_top_commitments(app, update_top_displays_cb) {
+    commitment_list = create_top_cube(app, "Commitment Title", "Partners", update_top_displays_cb)
+    partners_list = create_top_cube(app, "Country", "Partners", update_top_displays_cb)
+    entities_list = create_top_cube(app, "Partners", "Lead entity", update_top_displays_cb)
 }

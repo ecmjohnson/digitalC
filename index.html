@@ -137,7 +137,7 @@
                         .attr('d', path)
                         .on('mouseover',mouseoverLegend).on('mouseout',mouseoutLegend)
                         .on('click', coutryclicked);
-                    
+
                     countries.append('svg:text')
                         .attr('class', function(d){ return 'subunit-label la'+d.id+d.properties.name.replace(/[ \.#']+/g,''); })
                         //.attr('transform', function(d) { return 'translate('+ path.centroid(d) +')'; })
@@ -246,28 +246,27 @@
     // gauge_config.waveCount = 3;
     var liqGauge3 = add_liquid_gauge(svg3_settings, "fillgauge3", 0/*, gauge_config*/);
 
-        var liqGaugeIdx = 0;
-        function update_liquid_gauges_cb(data) {
-            if (liqGaugeIdx == 0) {
-                update_liquid_gauge(liqGauge1, data[3].toFixed(1));
-                liqGaugeIdx = 1;
-            } else if (liqGaugeIdx == 1) {
-                update_liquid_gauge(liqGauge2, data[3].toFixed(1));
-                liqGaugeIdx = 2;
-            } else if (liqGaugeIdx == 2) {
-                update_liquid_gauge(liqGauge3, data[3].toFixed(1));
-                liqGaugeIdx = 0;
-            }
+    function update_top_displays_cb(data) {
+        if (data[4].includes("Commitment Title-Partners")) {
+            // Top commitments
+            update_liquid_gauge(liqGauge1, data[3].toFixed(1));
+        } else if (data[4].includes("Country-Partners")) {
+            // Top partners
+            update_liquid_gauge(liqGauge2, data[3].toFixed(1));
+        } else if (data[4].includes("Partners-Lead entity")) {
+            // Top entities
+            update_liquid_gauge(liqGauge3, data[3].toFixed(1));
         }
+    }
 
     // Main program
-    main(update_liquid_gauges_cb);
+    main(update_top_displays_cb);
 
   </script>
 </body>
 
 <footer>
-    <p>Created by <a href="http://www.ecmjohnson.com/">Erik Johnson</a>, Moh, <a href="http://www.travisswandesign.ca">Travis Swan</a>, Winston Yang Hong, Yonis, Ahmed Sakr, Arsalan Sadig, Josh Campitelli for the <a href="https://branch-blog.qlik.com/qlikhacks-2018-an-ottawa-hackathon-ca7c63d69f1e">2018 QlikHack</a></p>
+    <p>Created by <a href="http://www.ecmjohnson.com/">Erik Johnson</a>, <a href="https://github.com/mkm684">Moh</a>, <a href="http://www.travisswandesign.ca">Travis Swan</a>, <a href="https://github.com/winstonhong">Winston Yang Hong </a>, Yonis, <a href="http://www.github.com/ahmedsakr">Ahmed Sakr</a>, <a href="http://www.github.com/arsalansadiq">Arsalan Sadiq</a>, <a href="http://www.github.com/joshcampitelli">Josh Campitelli</a> for the <a href="https://branch-blog.qlik.com/qlikhacks-2018-an-ottawa-hackathon-ca7c63d69f1e">2018 QlikHack</a></p>
     <img src="https://sustainabledevelopment.un.org/content/images/sdgskp.png"/>
     <img src="https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png?h=94&w=308&la=en&hash=8CD1A612A7DE97F79A646EAFFA8721F5FBF9C751"/>
 </footer>
