@@ -1,3 +1,5 @@
+var result = {}
+
 function twoDimensions(app, dim1, dim2) {
     var hyperCubeDef = {
         qDimensions: [
@@ -75,7 +77,7 @@ function createcube(app, hyperCubeDef, dim1, dim2) {
               obj[dim2] = row[1].qText
             }
             list.push(obj)
-          }  
+          }
       })
       resolve(list)
     })
@@ -122,16 +124,23 @@ function main(update_top_displays_cb) {
     console.log("App Opened", app)
 
     get_top_commitments(app, update_top_displays_cb);
-    
+
     twoDimensions(app, 'Partner List', 'Lead entity').then((response) => {
-      //console.log(response[4]["Lead entity"])  
-    }) 
+      //console.log(response[4]["Lead entity"])
+    })
 
     var listOfStuff =['Commitment Title', 'Partners', 'Lead entity', 'Ocean Basins', 'Indicator ID']
     listOfStuff.forEach((thing, index) => {
       dim_measure(app, 'Country', thing, 'count').then((response) => {
-        console.log("Number of " + thing + " for every Country")
-        console.log(response)
+        //console.log(response)
+        response.forEach((element) => {
+            //tooltip[thing][country] = response[i][thing]
+            var obj = {}
+            obj[thing] = element[thing];
+            result[element['Country']] = obj;
+        });
+
+        console.log(result['Japan']);
       })
     })
   })
