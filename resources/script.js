@@ -1,4 +1,4 @@
-var result = {}
+
 
 function twoDimensions(app, dim1, dim2) {
     var hyperCubeDef = {
@@ -85,6 +85,8 @@ function createcube(app, hyperCubeDef, dim1, dim2) {
 
 }
 
+let dataSet = [];
+
 
 // this is the config object used to connect to an app on a Qlik Sense server
 var config = {
@@ -125,23 +127,41 @@ function main(update_top_displays_cb) {
 
     get_top_commitments(app, update_top_displays_cb);
 
-    twoDimensions(app, 'Partner List', 'Lead entity').then((response) => {
-      //console.log(response[4]["Lead entity"])
-    })
+    var dataToPullFromQlikEngine =
+      {
+        0: 'Commitment Title',
+        1: 'Partners',
+        2: 'Lead entity',
+        3: 'Ocean Basins',
+        4: 'Indicator ID',
+        5: 'Goal ID',
+        6: 'Target Title'
+      }
 
-    var listOfStuff =['Commitment Title', 'Partners', 'Lead entity', 'Ocean Basins', 'Indicator ID']
+    var listOfStuff = Object.values(dataToPullFromQlikEngine);
+
+    var promises = []
+
     listOfStuff.forEach((thing, index) => {
-      dim_measure(app, 'Country', thing, 'count').then((response) => {
-        //console.log(response)
-        response.forEach((element) => {
-            //tooltip[thing][country] = response[i][thing]
-            var obj = {}
-            obj[thing] = element[thing];
-            result[element['Country']] = obj;
-        });
+      var result_set = dim_measure(app, 'Country', thing, 'count').then((response) => {
 
-        console.log(result['Japan']);
+        //console.log(response)
+        return new Promise((resolve, reject) => {
+        var result = []
+          response.forEach((element) => {
+              //tooltip[thing][country] = response[i][thing]
+              var obj = {}
+              obj[thing] = element[thing];
+              result[element['Country']] = obj;
+          });
+          resolve(result)
+        })
+
       })
-    })
+      promises.push(result_set)
+    });
+    Promise.all(promises).then((dataSetLists) => {
+      dataSet = dataSetLists;
+    });
   })
 }
