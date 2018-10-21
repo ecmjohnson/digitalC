@@ -1,3 +1,19 @@
+function myFunction() {
+
+var header = document.getElementsByClassName("header");
+var sticky = header.offsetTop;
+
+    console.log("yoooo");
+    if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+    } else {
+        header.classList.remove("sticky");
+    }
+}
+
+window.addEventListener('scroll', myFunction);
+
+
 function twoDimensions(app, dim1, dim2) {
     var hyperCubeDef = {
         qDimensions: [
@@ -19,30 +35,36 @@ function twoDimensions(app, dim1, dim2) {
         ]
     }
     var list = []
-    app.createCube(hyperCubeDef, hypercube => {
-        let matrix = hypercube.qHyperCube.qDataPages[0].qMatrix
-            matrix.forEach((row, index) => {
-                var obj = {}
-                // if row[0] have multiple things
-                if (row[0].qText.includes(",") == true) {
-                  let dimension1 = row[0].qText.split(",")
-                  obj[dim1] = dimension1
-                } else {
-                  obj[dim1] = row[0].qText
-                }
 
-                //if row[1] have multiple things
-                if (row[1].qText.includes(",") == true) {
-                  let dimension2 = row[1].qText.split(",")
-                  obj[dim2] = dimension2
-                } else {
-                  obj[dim2] = row[1].qText
-                }
-                list.push(obj)
-            })
-    })
-    return list
-}3
+    return new Promise((resolve, reject) => {
+        app.createCube(hyperCubeDef, hypercube => {
+           let matrix = hypercube.qHyperCube.qDataPages[0].qMatrix
+               matrix.forEach((row, index) => {
+                   var obj = {}
+                   // if row[0] have multiple things
+                   if ( row[0].qText.includes(",") ) {
+                     let dimension1 = row[0].qText.split(",")
+                     obj[dim1] = dimension1
+                   } else {
+                     obj[dim1] = row[0].qText
+                   }
+
+                   //if row[1] have multiple things
+                   if ( row[1].qText.includes(",") ) {
+                     let dimension2 = row[1].qText.split(",")
+                     obj[dim2] = dimension2
+                   } else {
+                     obj[dim2] = row[1].qText
+                   }
+                   list.push(obj)
+               })
+           resolve(list);
+       })
+    });
+
+
+
+}
 
 // this is the config object used to connect to an app on a Qlik Sense server
 var config = {
@@ -81,6 +103,12 @@ function main() {
       app = qlik.openApp(config.appname, config)
       console.log("App Opened", app)
       var ret_list = twoDimensions(app, 'Partner List', 'Lead entity'); // example
-      console.log(ret_list)
+
+      ret_list.then( (response) => {
+          let partnerList = response;
+
+          console.log(partnerList[0]["Lead entity"]);
+      });
+
   })
 }
