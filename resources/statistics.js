@@ -31,7 +31,6 @@ function create_top_cube(app, dim1, measurement, my_callback) {
 
     var first, second, third, fourth, percentageValue
     app.createCube(hyperCubeDef, hypercube => {
-      console.log(hypercube)
         let matrix = hypercube.qHyperCube.qDataPages[0].qMatrix
             matrix.forEach((row, index) => {
                 if (first == null) {
