@@ -114,21 +114,20 @@ footer {
     display:flex;
     padding: 30px 60px;
   }
-  
+
   footer img{
     height:52px;
     width:auto;
     margin: 0 10px;
   }
-  
+
   footer a {
     color: #AABEE3
   }
-  
+
   footer a:hover {
     color: #64B5F6
   }
-
 
 .top3 {
     display: flex;
