@@ -18,31 +18,70 @@ function twoDimensions(app, dim1, dim2) {
         }
         ]
     }
-    var list = []
-    app.createCube(hyperCubeDef, hypercube => {
-        let matrix = hypercube.qHyperCube.qDataPages[0].qMatrix
-            matrix.forEach((row, index) => {
-                var obj = {}
-                // if row[0] have multiple things
-                if (row[0].qText.includes(",") == true) {
-                  let dimension1 = row[0].qText.split(",")
-                  obj[dim1] = dimension1
-                } else {
-                  obj[dim1] = row[0].qText
-                }
-
-                //if row[1] have multiple things
-                if (row[1].qText.includes(",") == true) {
-                  let dimension2 = row[1].qText.split(",")
-                  obj[dim2] = dimension2
-                } else {
-                  obj[dim2] = row[1].qText
-                }
-                list.push(obj)
-            })
-    })
-    return list
+    return createcube(app, hyperCubeDef, dim1, dim2)
 }
+
+function dim_measure(app, dim, meas, func) {
+  var local_qdef = '=' + func + '( distinct [' + meas + '])'
+  var hyperCubeDef = {
+    qDimensions: [
+      {
+        qDef: {
+          qFieldDefs: [dim]
+        },
+        qNullSuppression: true
+      },
+    ],
+    qMeasures: [
+      {
+        qDef: { qDef: local_qdef},
+        qSortBy: { qSortByNumeric: true }
+      }
+    ],
+    qInitialDataFetch: [
+      {
+        qTop: 0,
+        qLeft: 0,
+        qHeight: 500,
+        qWidth: 2
+      }
+    ]
+  }
+  return createcube(app, hyperCubeDef, dim, meas)
+}
+
+function createcube(app, hyperCubeDef, dim1, dim2) {
+  var list = []
+  return new Promise((resolve, reject) => {
+    app.createCube(hyperCubeDef, hypercube => {
+      let matrix = hypercube.qHyperCube.qDataPages[0].qMatrix
+      matrix.forEach((row, index) => {
+          let obj = {}
+          // check if any qText is null
+          if(row[0].qText != null && row[1].qText != null) {
+            // if row[0] have multiple things
+            if (row[0].qText.includes(",") == true) {
+              let dimension1 = row[0].qText.split(",")
+              obj[dim1] = dimension1
+            } else {
+              obj[dim1] = row[0].qText
+            }
+
+            //if row[1] have multiple things
+            if (row[1].qText.includes(",") == true) {
+              let dimension2 = row[1].qText.split(",")
+              obj[dim2] = dimension2
+            } else {
+              obj[dim2] = row[1].qText
+            }
+            list.push(obj)
+          }  
+      })
+      resolve(list)
+    })
+  })
+}
+
 
 // this is the config object used to connect to an app on a Qlik Sense server
 var config = {
@@ -83,5 +122,13 @@ function main() {
       //var ret_list = twoDimensions(app, 'Partner List', 'Lead entity'); // example
       get_top_commitments(app);
       //console.log(ret_list)
+
+      twoDimensions(app, 'Partner List', 'Lead entity').then((response) => {
+        console.log(response[4]["Lead entity"])  
+      }) 
+
+      dim_measure(app, 'Country', 'Commitment Title', 'count').then((response) => {
+        console.log(response[100]['Country'])
+      })
   })
 }
