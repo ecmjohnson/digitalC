@@ -8,7 +8,7 @@ function add_link_network(network, source_index, target_index, value)
     network.links.push({source:source_index, target:target_index, value:value});
 }
 
-function does_node_contain(network, name)
+function does_network_contain(network, name)
 {
     var list = network.nodes;
     list.forEach(elem => {

@@ -334,10 +334,11 @@
     function update_network_display_cb(thing, data) {
         num_cbs = num_cbs + 1;
         for (var i = 0; i < 10; i++) {
-            if (!does_node_contain(network, data[i]["Country"])) {
+            if (!does_network_contain(network, data[i]["Country"]) === true) {
                 add_node_network(network, data[i]["Country"], node_count(network));
             }
         }
+
         if (thing.includes("Partners")) {
             
         } else if (thing.includes("Commitment Title")) {
@@ -349,20 +350,13 @@
         } else if (thing.includes("Indicator ID")) {
 
         }
-        // var network = {nodes:[], links:[]};
-        // add_node_network(network, "Elizabeth Bennet", 1);
-        // add_node_network(network, "Jane Bennet", 2);
-        // add_node_network(network, "Mary Bennet", 2);
-        // add_node_network(network, "Kitty Bennet", 2);
-        // add_link_network(network, 0, 1, 1);
-        // add_link_network(network, 0, 2, 1);
-        // add_link_network(network, 0, 3, 2);
 
         if (num_cbs == 5) {
             for (var i = 0; i < 50; i++) {
+                // 50 random links to demonstrate appearance
                 var source = Math.floor(Math.random() * node_count(network));
                 var target = Math.floor(Math.random() * node_count(network));
-                var group = Math.floor(Math.random() * 5);
+                var group = Math.floor(Math.random() * 10);
                 add_link_network(network, source, target, group);
             }
             display_network("#relationship-section", 960, 500, network)
