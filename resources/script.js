@@ -80,6 +80,7 @@ function createcube(app, hyperCubeDef, dim1, dim2) {
       resolve(list)
     })
   })
+
 }
 
 
@@ -90,7 +91,7 @@ var config = {
   port: '443',
   isSecure: true,
   rejectUnauthorized: false,
-  appname: '0b0fc6d5-05ce-44d7-95aa-80d0680b3559'
+  appname: '1a95d089-d275-466b-ae89-695a226048c4'
 }
 
 function main() {
@@ -119,6 +120,7 @@ function main() {
       // Open a dataset on the server
       app = qlik.openApp(config.appname, config)
       console.log("App Opened", app)
+
       //var ret_list = twoDimensions(app, 'Partner List', 'Lead entity'); // example
       get_top_commitments(app);
       //console.log(ret_list)
@@ -130,5 +132,6 @@ function main() {
       dim_measure(app, 'Country', 'Commitment Title', 'count').then((response) => {
         console.log(response[100]['Country'])
       })
+
   })
 }
