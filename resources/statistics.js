@@ -47,6 +47,7 @@ function create_top_cube(app, dim1, measurement, my_callback) {
                   fourth=first[1].qNum+second[1].qNum+third[1].qNum
                   percentageValue=(fourth/hypercube.qHyperCube.qGrandTotalRow[0].qNum)*100
                   list.push(percentageValue)
+                  list.push(dim1 + '-' + measurement)
                 }else if (process_results_called != true){
                     process_results_called = true
                     my_callback(list)
