@@ -327,34 +327,15 @@
             update_liquid_gauge(liqGauge3, data[3].toFixed(1));
         }
     }
-
-    var network = {
-        "nodes": [
-            { "name": "Elizabeth Bennet", "group": 1 },
-            { "name": "Jane Bennet", "group": 2 },
-            { "name": "Mary Bennet", "group": 2 },
-            { "name": "Kitty Bennet", "group": 2 },
-            { "name": "Mr Bennet", "group": 3 },
-            { "name": "Mrs Bennet", "group": 3 },
-            { "name": "Lydia Bennet", "group": 2 },
-            { "name": "Mrs Philips", "group": 4 },
-            { "name": "Edward Gardiner", "group": 4 },
-            { "name": "Mrs M. Gardiner", "group": 4 }
-        ],
-        "links": [
-            { "source": 0, "target": 1, "value": 1 },
-            { "source": 0, "target": 2, "value": 1 },
-            { "source": 0, "target": 3, "value": 1 },
-            { "source": 0, "target": 6, "value": 1 },
-            { "source": 4, "target": 5, "value": 2 },
-            { "source": 4, "target": 0, "value": 3 },
-            { "source": 5, "target": 0, "value": 3 },
-            { "source": 5, "target": 7, "value": 4 },
-            { "source": 5, "target": 8, "value": 4 },
-            { "source": 5, "target": 9, "value": 4 },
-            { "source": 8, "target": 9, "value": 2 }
-        ]
-    }
+    
+    var network = {nodes:[], links:[]};
+    add_node_network(network, "Elizabeth Bennet", 1);
+    add_node_network(network, "Jane Bennet", 2);
+    add_node_network(network, "Mary Bennet", 2);
+    add_node_network(network, "Kitty Bennet", 2);
+    add_link_network(network, 0, 1, 1);
+    add_link_network(network, 0, 2, 1);
+    add_link_network(network, 0, 3, 2);
 
     display_network("#relationship-section", 960, 500, network)
 

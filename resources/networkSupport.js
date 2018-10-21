@@ -1,3 +1,13 @@
+function add_node_network(network, node_name, group_index)
+{
+    network.nodes.push({name:node_name, group:group_index});
+}
+
+function add_link_network(network, source_index, target_index, value)
+{
+    network.links.push({source:source_index, target:target_index, value:value});
+}
+
 function display_network(class_name, width, height, network)
 {
 
@@ -5,8 +15,8 @@ function display_network(class_name, width, height, network)
         colorLink = d3.scale.category10();
 
     var force = d3.layout.force()
-        .charge(-120)
-        .linkDistance(35)
+        .charge(-150)
+        .linkDistance(65)
         .size([width, height]);
 
     var svg = d3.select(class_name).append("svg")
@@ -29,9 +39,12 @@ function display_network(class_name, width, height, network)
         .data(network.nodes)
         .enter().append("circle")
         .attr("class", "node")
-        .attr("r", 20)
+        .attr("r", 15)
         .style("fill", function(d) { return colorNode(d.group); })
         .call(force.drag);
+
+    node.append("title")
+        .text(function(d) { return d.name; });
 
     force.on("tick", function() {
         link.attr("x1", function(d) { return d.source.x; })
