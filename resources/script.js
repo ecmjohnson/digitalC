@@ -94,7 +94,7 @@ var config = {
   appname: '1a95d089-d275-466b-ae89-695a226048c4'
 }
 
-function main(update_data_cb) {
+function main(update_top_displays_cb) {
   // our API uses requirejs, so here we're setting up our base URL
   require.config({
     baseUrl:
@@ -121,7 +121,7 @@ function main(update_data_cb) {
     app = qlik.openApp(config.appname, config)
     console.log("App Opened", app)
 
-    get_top_commitments(app, update_data_cb);
+    get_top_commitments(app, update_top_displays_cb);
     
     twoDimensions(app, 'Partner List', 'Lead entity').then((response) => {
       //console.log(response[4]["Lead entity"])  
