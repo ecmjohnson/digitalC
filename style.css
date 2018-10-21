@@ -106,3 +106,25 @@ path {
     color: black;
     position: absolute;
 }
+
+footer {
+    min-height: 100px;
+    background-color: #666;
+    color: #CCC;
+    display:flex;
+    padding: 30px 60px;
+  }
+  
+  footer img{
+    height:52px;
+    width:auto;
+    margin: 0 10px;
+  }
+  
+  footer a {
+    color: #AABEE3
+  }
+  
+  footer a:hover {
+    color: #64B5F6
+  }
