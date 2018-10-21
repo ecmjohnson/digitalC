@@ -8,6 +8,22 @@ function add_link_network(network, source_index, target_index, value)
     network.links.push({source:source_index, target:target_index, value:value});
 }
 
+function does_node_contain(network, name)
+{
+    var list = network.nodes;
+    list.forEach(elem => {
+        if (elem.name.includes(name)) {
+            return true;
+        }
+    });
+    return false;
+}
+
+function node_count(network)
+{
+    return network.nodes.length;
+}
+
 function display_network(class_name, width, height, network)
 {
 
