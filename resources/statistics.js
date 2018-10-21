@@ -14,6 +14,7 @@ function create_top_cube(app, dim1, measurement, my_callback) {
         qMeasures: [
         {
             qDef: { qDef: '=count([' + measurement + '])' },
+            //qDef: { qDef: ''},
             qSortBy: { qSortByNumeric: -1}
         }
         ],
@@ -28,7 +29,7 @@ function create_top_cube(app, dim1, measurement, my_callback) {
         ]
     }
 
-    var first, second, third
+    var first, second, third, fourth, percentageValue
     app.createCube(hyperCubeDef, hypercube => {
         let matrix = hypercube.qHyperCube.qDataPages[0].qMatrix
             matrix.forEach((row, index) => {
@@ -42,7 +43,11 @@ function create_top_cube(app, dim1, measurement, my_callback) {
                 } else if (third == null) {
                     third = row
                     list.push(row)
-                } else if (process_results_called != true){
+                }else if (fourth==null){
+                  fourth=first[1].qNum+second[1].qNum+third[1].qNum
+                  percentageValue=(fourth/hypercube.qHyperCube.qGrandTotalRow[0].qNum)*100
+                  list.push(percentageValue)
+                }else if (process_results_called != true){
                     process_results_called = true
                     my_callback(list)
                     list = []
